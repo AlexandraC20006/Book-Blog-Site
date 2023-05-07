@@ -1,13 +1,19 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, session, redirect, url_for
 import sqlite3
 
 
 app = Flask(__name__)
 
 
-@app.route('/') #sign in page
+@app.route('/', methods = ['GET', 'POST']) #sign in page
 def sign_in():
-    return render_template("sign_in.html")
+    error = None
+    if request.method == 'POST':
+        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+            error = 'Incorrect username or password. Please try again.'
+        else:
+            return redirect(url_for('home'))
+    return render_template("sign_in.html", error=error)
 
 
 @app.route('/home') #home page
