@@ -17,7 +17,12 @@ def home():
 
 @app.route('/allbooks')
 def all_books():
-    return render_template("all_books.html")
+    conn = sqlite3.connect("bookshelf.db")
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM Book")
+    results = cur.fetchall()
+    print(results)
+    return render_template("all_books.html", results = results)
 
 
 if __name__ == "__main__":

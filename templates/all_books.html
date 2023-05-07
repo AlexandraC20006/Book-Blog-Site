@@ -4,4 +4,13 @@
 <hr>
 <h1>WOW LOOK AT ALL THE BOOKS</h1>
 
+{% for item in results %}
+    <h2>
+        <a href="/book/{{item[0]}}">
+            {{item[1]}}
+        </a>
+    </h2>
+    <img src="/static/images/{{item[5]}}" alt="{{item[6]}}">
+{% endfor %}
+
 {% endblock %}
