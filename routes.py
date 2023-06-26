@@ -23,7 +23,7 @@ Session(app)
 
 
 # for signin i used the tutorial https://realpython.com/introduction-to-flask-part-2-creating-a-login-page/
-@app.route("/", methods = ["GET", "POST"]) #sign in page
+@app.route("/sign_in", methods = ["GET", "POST"]) #sign in page
 def sign_in():
     # user_id = session.get("user_id") # Retrieve a value from the session
 
@@ -40,13 +40,12 @@ def sign_in():
     return render_template("sign_in.html", error=error)
 
 
-@app.route("/home") #home page
+@app.route("/") #home page
 def home():
     if session.get("logged_in") == True:
-        return render_template("home_si.html") #takes you to signed in page
+        return render_template("home_si.html") #takes you to signed in home page
     else:
-        return render_template("home_so.html") #takes you to signed out page
-
+        return render_template("home_so.html") #takes you to signed out home page
 
 
 @app.route("/allbooks")
@@ -57,6 +56,12 @@ def all_books():
     results = cur.fetchall()
     print(results)
     return render_template("all_books.html", results = results)
+
+
+@app.route("/sign_out")
+def sign_out():
+    session["logged_in"] = False
+    return render_template("sign_out.html")
 
 
 if __name__ == "__main__":
