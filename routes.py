@@ -23,7 +23,7 @@ Session(app)
 
 
 # for signin i used the tutorial https://realpython.com/introduction-to-flask-part-2-creating-a-login-page/
-@app.route("/sign_in", methods = ["GET", "POST"]) #sign in page
+@app.route("/sign_in", methods=["GET", "POST"]) #sign in page
 def sign_in():
     # user_id = session.get("user_id") # Retrieve a value from the session
 
@@ -54,11 +54,6 @@ def all_books():
     cur = conn.cursor()
     cur.execute("SELECT Book.id, Book.title, Book.image, Author.name FROM Book JOIN BookAuthor ON Book.id = BookAuthor.bid JOIN Author ON Author.id = BookAuthor.aid")
     results = cur.fetchall()
-    # id = results[0]
-    # title = results[1]
-    # image = results[2]
-    # author = results[3]
-    print(results)
     return render_template("all_books.html", results=results)
 
 
@@ -67,6 +62,16 @@ def sign_out():
     session["logged_in"] = False
     return render_template("sign_out.html")
 
+
+@app.route("/authors")
+def authors():
+    conn = sqlite3.connect("bookshelf.db")
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM Author")
+    results = cur.fetchall()
+    return render_template("author.html", results=results)
+
+#"SELECT Author.id, Author.name, FROM Author JOIN BookAuthor ON BookAuthor.aid = Author.id JOIN Book ON Book.id = BookAuthor.bid"
 
 if __name__ == "__main__":
     app.run(debug=True)

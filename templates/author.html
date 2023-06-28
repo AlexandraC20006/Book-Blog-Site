@@ -1,0 +1,15 @@
+{% extends "layout.html"%}
+{% block content %}
+
+<hr>
+<h1>WOW LOOK AT ALL THE AUTHORS</h1>
+
+{% for item in results %}
+    <h2>
+        <a href="/author/{{item[0]}}">
+            {{item[1]}}
+        </a>
+    </h2>
+{% endfor %}
+
+{% endblock %}
