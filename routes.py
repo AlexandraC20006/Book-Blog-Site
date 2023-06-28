@@ -52,10 +52,14 @@ def home():
 def all_books():
     conn = sqlite3.connect("bookshelf.db")
     cur = conn.cursor()
-    cur.execute("SELECT * FROM Book")
+    cur.execute("SELECT Book.id, Book.title, Book.image, Author.name FROM Book JOIN BookAuthor ON Book.id = BookAuthor.bid JOIN Author ON Author.id = BookAuthor.aid")
     results = cur.fetchall()
+    # id = results[0]
+    # title = results[1]
+    # image = results[2]
+    # author = results[3]
     print(results)
-    return render_template("all_books.html", results = results)
+    return render_template("all_books.html", results=results)
 
 
 @app.route("/sign_out")
