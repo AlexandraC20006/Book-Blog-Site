@@ -53,37 +53,47 @@ def home():
         return render_template("home_so.html")
 
 
-@app.route("/allbooks")
+@app.route("/allbooks")  # All books on one page
 def all_books():
     conn = sqlite3.connect("bookshelf.db")
     cur = conn.cursor()
-    cur.execute("SELECT Book.id, Book.title, Book.image, Author.name FROM Book JOIN BookAuthor ON Book.id = BookAuthor.bid JOIN Author ON Author.id = BookAuthor.aid")
+    # Finds the book id, title, image and author of every book
+    cur.execute("SELECT Book.id, Book.title, Book.image, Author.name FROM Book JOIN BookAuthor ON Book.id = BookAuthor.bid JOIN Author ON Author.id = BookAuthor.aid;")
     results = cur.fetchall()
     return render_template("all_books.html", results=results)
 
 
-@app.route("/sign_out")
+@app.route("/sign_out")  # changes your session from logged in to logged out
 def sign_out():
     session["logged_in"] = False
     return render_template("sign_out.html")
 
 
-@app.route("/authors")
-def authors():
+@app.route("/authors")  # List of authors, they link to a page with their books
+def all_authors():
     conn = sqlite3.connect("bookshelf.db")
     cur = conn.cursor()
     cur.execute("SELECT * FROM Author")
     results = cur.fetchall()
-    return render_template("author.html", results=results)
+    return render_template("all_authors.html", results=results)
 
 
-@app.route("/genres")
-def genres():
+@app.route("/author/<int:id>")  # automatic page with author's books
+def author(id):
+    conn = sqlite3.connect("bookshelf.db")
+    cur = conn.cursor()
+    cur.execute("SELECT BookAuthor.aid, Book.id, Book.title FROM Book JOIN BookAuthor ON BookAuthor.bid = Book.id WHERE BookAuthor.aid = ?;", (id,))
+    results = cur.fetchall()
+    return render_template("author_books.html", results=results)
+
+
+@app.route("/genres")  # List of genres, they link to a page with their books
+def all_genres():
     conn = sqlite3.connect("bookshelf.db")
     cur = conn.cursor()
     cur.execute("SELECT * FROM Genre")
     results = cur.fetchall()
-    return render_template("genre.html", results=results)
+    return render_template("all_genres.html", results=results)
 
 # "SELECT Author.id, Author.name, FROM Author JOIN BookAuthor ON BookAuthor.aid = Author.id JOIN Book ON Book.id = BookAuthor.bid"
 
