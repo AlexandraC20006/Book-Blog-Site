@@ -2,12 +2,12 @@
 {% block content %}
 
 <hr>
-<h1>WOW LOOK AT ALL THE GENRES</h1>
+<h1>WOW LOOK AT ALL OF THE BOOKS IN THIS GENRE</h1>
 
 {% for item in results %}
     <h2>
-        <a href="/genre/{{item[0]}}">
-            {{item[1]}}
+        <a href="/book/{{item[0]}}">
+            {{item[2]}}
         </a>
     </h2>
 {% endfor %}

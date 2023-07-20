@@ -1,4 +1,7 @@
 
+# NEXT STEP: add images into the genre and author pages (SO MUCH FUCKING SQL)
+# also probably should find a way to wrap text...............................................
+
 #############################################################
 #                                                           #
 #   NOTE: School computers wipe every time you log off!     #
@@ -58,7 +61,12 @@ def all_books():
     conn = sqlite3.connect("bookshelf.db")
     cur = conn.cursor()
     # Finds the book id, title, image and author of every book
-    cur.execute("SELECT Book.id, Book.title, Book.image, Author.name FROM Book JOIN BookAuthor ON Book.id = BookAuthor.bid JOIN Author ON Author.id = BookAuthor.aid;")
+    cur.execute("SELECT Book.id, \
+        Book.title, \
+        Book.image, \
+        Author.name \
+        FROM Book \
+        JOIN BookAuthor ON Book.id = BookAuthor.bid JOIN Author ON Author.id = BookAuthor.aid;")
     results = cur.fetchall()
     return render_template("all_books.html", results=results)
 
@@ -95,7 +103,14 @@ def all_genres():
     results = cur.fetchall()
     return render_template("all_genres.html", results=results)
 
-# "SELECT Author.id, Author.name, FROM Author JOIN BookAuthor ON BookAuthor.aid = Author.id JOIN Book ON Book.id = BookAuthor.bid"
+
+@app.route("/genre/<int:id>")  # automatic page with books in a genre
+def genre(id):
+    conn = sqlite3.connect("bookshelf.db")
+    cur = conn.cursor()
+    cur.execute("SELECT BookGenre.gid, Book.id, Book.title FROM Book JOIN BookGenre ON BookGenre.bid = Book.id WHERE BookGenre.gid = ?;", (id,))
+    results = cur.fetchall()
+    return render_template("genre_books.html", results=results)
 
 
 if __name__ == "__main__":
