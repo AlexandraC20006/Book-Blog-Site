@@ -1,6 +1,5 @@
 
 # NEXT STEP: add images into the genre and author pages (SO MUCH FUCKING SQL)
-# also probably should find a way to wrap text...............................................
 
 #############################################################
 #                                                           #
@@ -24,7 +23,8 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 
-# for signin i used the tutorial https://realpython.com/introduction-to-flask-part-2-creating-a-login-page/
+# for signin i used the tutorial
+# https://realpython.com/introduction-to-flask-part-2-creating-a-login-page/
 @app.route("/sign_in", methods=["GET", "POST"])  # sign in page
 def sign_in():
     # user_id = session.get("user_id") # Retrieve a value from the session
@@ -66,7 +66,8 @@ def all_books():
         Book.image, \
         Author.name \
         FROM Book \
-        JOIN BookAuthor ON Book.id = BookAuthor.bid JOIN Author ON Author.id = BookAuthor.aid;")
+        JOIN BookAuthor ON Book.id = BookAuthor.bid \
+        JOIN Author ON Author.id = BookAuthor.aid;")
     results = cur.fetchall()
     return render_template("all_books.html", results=results)
 
@@ -90,7 +91,17 @@ def all_authors():
 def author(id):
     conn = sqlite3.connect("bookshelf.db")
     cur = conn.cursor()
-    cur.execute("SELECT BookAuthor.aid, Book.id, Book.title FROM Book JOIN BookAuthor ON BookAuthor.bid = Book.id WHERE BookAuthor.aid = ?;", (id,))
+    cur.execute("SELECT BookAuthor.aid, \
+            Book.id, \
+            Book.title, \
+            Book.image, \
+            Author.name \
+        FROM Book \
+            JOIN \
+            BookAuthor ON BookAuthor.bid = Book.id \
+            JOIN \
+            Author ON Author.id = BookAuthor.aid \
+        WHERE BookAuthor.aid = ?;", (id,))
     results = cur.fetchall()
     return render_template("author_books.html", results=results)
 
@@ -108,7 +119,12 @@ def all_genres():
 def genre(id):
     conn = sqlite3.connect("bookshelf.db")
     cur = conn.cursor()
-    cur.execute("SELECT BookGenre.gid, Book.id, Book.title FROM Book JOIN BookGenre ON BookGenre.bid = Book.id WHERE BookGenre.gid = ?;", (id,))
+    cur.execute("SELECT BookGenre.gid, \
+            Book.id, \
+            Book.title \
+        FROM Book \
+            JOIN BookGenre ON BookGenre.bid = Book.id \
+        WHERE BookGenre.gid = ?;", (id,))
     results = cur.fetchall()
     return render_template("genre_books.html", results=results)
 
