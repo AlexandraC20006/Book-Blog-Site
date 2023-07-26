@@ -121,9 +121,16 @@ def genre(id):
     cur = conn.cursor()
     cur.execute("SELECT BookGenre.gid, \
             Book.id, \
-            Book.title \
+            Book.title, \
+            Book.image, \
+            Author.name \
         FROM Book \
-            JOIN BookGenre ON BookGenre.bid = Book.id \
+            JOIN \
+            BookGenre ON BookGenre.bid = Book.id \
+            JOIN \
+            BookAuthor ON BookAuthor.bid = Book.id \
+            JOIN \
+            Author ON Author.id = BookAuthor.aid \
         WHERE BookGenre.gid = ?;", (id,))
     results = cur.fetchall()
     return render_template("genre_books.html", results=results)
