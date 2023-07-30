@@ -1,6 +1,3 @@
-
-# NEXT STEP: add images into the genre and author pages (SO MUCH FUCKING SQL)
-
 #############################################################
 #                                                           #
 #   NOTE: School computers wipe every time you log off!     #
@@ -136,5 +133,39 @@ def genre(id):
     return render_template("genre_books.html", results=results)
 
 
+@app.route("/book_info/<int:id>")  # page displaying all info on one book
+def book_info(id):
+    conn = sqlite3.connect("bookshelf.db")
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM Book WHERE id = ?;", (id,))
+    book = cur.fetchall()
+    cur.execute("SELECT Genre.name \
+        FROM Genre \
+            JOIN \
+            BookGenre ON BookGenre.gid = Genre.id \
+        WHERE BookGenre.bid = ?;", (id,))
+    genres = cur.fetchall()
+    cur.execute("SELECT Author.name \
+        FROM Author \
+            JOIN \
+            BookAuthor ON BookAuthor.aid = Author.id \
+        WHERE BookAuthor.bid = ?;", (id,))
+    authors = cur.fetchall()
+    return render_template("book_info.html", book=book, genres=genres, authors=authors)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+# SELECT *
+#   FROM Book
+#        JOIN
+#        BookGenre ON BookGenre.bid = Book.id
+#        JOIN
+#        Genre ON Genre.id = BookGenre.gid
+#        JOIN
+#        BookAuthor ON BookAuthor.bid = Book.id
+#        JOIN
+#        Author ON Author.id = BookAuthor.aid
+#  WHERE Book.id = 1;
