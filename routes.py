@@ -138,7 +138,7 @@ def book_info(id):
     conn = sqlite3.connect("bookshelf.db")
     cur = conn.cursor()
     cur.execute("SELECT * FROM Book WHERE id = ?;", (id,))
-    book = cur.fetchall()
+    book = cur.fetchone()
     cur.execute("SELECT Genre.name \
         FROM Genre \
             JOIN \
@@ -156,16 +156,3 @@ def book_info(id):
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-# SELECT *
-#   FROM Book
-#        JOIN
-#        BookGenre ON BookGenre.bid = Book.id
-#        JOIN
-#        Genre ON Genre.id = BookGenre.gid
-#        JOIN
-#        BookAuthor ON BookAuthor.bid = Book.id
-#        JOIN
-#        Author ON Author.id = BookAuthor.aid
-#  WHERE Book.id = 1;

@@ -1,12 +1,12 @@
 {% extends "layout.html"%}
 {% block content %}
 
-<hr>
+
 <h1>WOW LOOK AT ALL OF THE BOOKS IN THIS GENRE</h1>
 
 {% for item in results %}
     <h2>
-        <a href="/book_info/{{item[0]}}">
+        <a href="/book_info/{{item[1]}}">
             {{item[2]}}
         </a>
     </h2>

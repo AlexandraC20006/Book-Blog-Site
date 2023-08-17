@@ -1,3 +1,78 @@
+/*--------------------------*/
+/*                          */
+/*        WHOLE SITE        */
+/*                          */
+/*--------------------------*/
+
+body {
+    margin: 0;
+    background-color: #e8dab2;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
 img {
-    width: 15%;
+    width: 25%;
+}
+
+p {
+    font-family: 'Muli', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+/*--------------------------*/
+/*                          */
+/*          HEADER          */
+/*                          */
+/*--------------------------*/
+
+header {
+    background-color: #dd6e42;
+    margin: 0px;
+    padding: 10px;
+    display: block;
+    text-align: center;
+}
+
+/*--------------------------*/
+/*                          */
+/*          NAV BAR         */
+/*                          */
+/*--------------------------*/
+
+nav {
+    background-color: #4f6d7a;
+    padding: 0px 20% 0px 20%;
+    display: flex;
+    margin: 0px;
+}
+
+nav a {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+}
+
+/*--------------------------*/
+/*                          */
+/*           BODY           */
+/*                          */
+/*--------------------------*/
+
+main {
+    background-color: #eaeaea;
+    padding: 10px;
+    margin: 0px 20%;
+    min-height: 700px;
+}
+
+/*--------------------------*/
+/*                          */
+/*          FOOTER          */
+/*                          */
+/*--------------------------*/
+
+footer {
+    background-color: #4f6d7a;
+    padding: 10px;
 }
