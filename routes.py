@@ -10,6 +10,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask_session import Session
 import sqlite3
+import math
 
 
 app = Flask(__name__)
@@ -66,7 +67,9 @@ def all_books():
         JOIN BookAuthor ON Book.id = BookAuthor.bid \
         JOIN Author ON Author.id = BookAuthor.aid;")
     results = cur.fetchall()
-    return render_template("all_books.html", results=results)
+    row_amount = len(results)/3
+    rows = math.ceil(row_amount)  # rows of images to display
+    return render_template("all_books.html", results=results, rows=rows)
 
 
 @app.route("/sign_out")  # changes your session from logged in to logged out

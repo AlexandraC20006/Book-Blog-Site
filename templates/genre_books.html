@@ -4,13 +4,14 @@
 
 <h1>WOW LOOK AT ALL OF THE BOOKS IN THIS GENRE</h1>
 
-{% for item in results %}
-    <h2>
-        <a href="/book_info/{{item[1]}}">
-            {{item[2]}}
-        </a>
-    </h2>
-    <img src="/static/images/{{item[3]}}" alt="Cover of {{item[2]}} by {{item[4]}}">
-{% endfor %}
+<div class="grid-container">
+    {% for item in results %}
+        <div class="grid-item">
+            <a href="/book_info/{{item[1]}}">
+                <img src="/static/images/{{item[3]}}" alt="Cover of {{item[2]}} by {{item[4]}}">
+            </a>
+        </div>
+    {% endfor %}
+</div>
 
 {% endblock %}
