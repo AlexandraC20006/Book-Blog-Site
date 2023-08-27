@@ -12,11 +12,34 @@ body {
 
 img {
     width: 100%;
-    align-self: center;
 }
 
 p {
     font-family: 'Muli', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+a {
+    color: blue;
+}
+
+.authors :hover{
+    color: #4f6d7a;
+}
+
+.genres :hover {
+    color: #4f6d7a;
+}
+
+.authors {
+    width: 100%;
+    text-align: center;
+    color: blue;
+}
+
+.genres {
+    width: 100%;
+    text-align: center;
+    color: blue;
 }
 
 /*--------------------------*/
@@ -29,6 +52,9 @@ header {
     background-color: #dd6e42;
     padding: 10px;
     text-align: center;
+    font-family: 'EB Garamond', 'Times New Roman', Times, serif;
+    color: #e8dab2;
+    font-size: larger;
 }
 
 /*--------------------------*/

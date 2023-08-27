@@ -20,6 +20,10 @@ app = Flask(__name__)
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+def cur_setup():
+    conn = sqlite3.connect("bookshelf.db")
+    return conn.cursor()
+
 
 # for signin i used the tutorial
 # https://realpython.com/introduction-to-flask-part-2-creating-a-login-page/
@@ -56,8 +60,7 @@ def home():
 
 @app.route("/allbooks")  # All books on one page
 def all_books():
-    conn = sqlite3.connect("bookshelf.db")
-    cur = conn.cursor()
+    cur = cur_setup()
     # Finds the book id, title, image and author of every book
     cur.execute("SELECT Book.id, \
         Book.title, \
@@ -80,8 +83,7 @@ def sign_out():
 
 @app.route("/authors")  # List of authors, they link to a page with their books
 def all_authors():
-    conn = sqlite3.connect("bookshelf.db")
-    cur = conn.cursor()
+    cur = cur_setup()
     cur.execute("SELECT * FROM Author")
     results = cur.fetchall()
     return render_template("all_authors.html", results=results)
@@ -89,8 +91,7 @@ def all_authors():
 
 @app.route("/author/<int:id>")  # automatic page with author's books
 def author(id):
-    conn = sqlite3.connect("bookshelf.db")
-    cur = conn.cursor()
+    cur = cur_setup()
     cur.execute("SELECT BookAuthor.aid, \
             Book.id, \
             Book.title, \
@@ -108,8 +109,7 @@ def author(id):
 
 @app.route("/genres")  # List of genres, they link to a page with their books
 def all_genres():
-    conn = sqlite3.connect("bookshelf.db")
-    cur = conn.cursor()
+    cur = cur_setup()
     cur.execute("SELECT * FROM Genre")
     results = cur.fetchall()
     return render_template("all_genres.html", results=results)
@@ -117,8 +117,7 @@ def all_genres():
 
 @app.route("/genre/<int:id>")  # automatic page with books in a genre
 def genre(id):
-    conn = sqlite3.connect("bookshelf.db")
-    cur = conn.cursor()
+    cur = cur_setup()
     cur.execute("SELECT BookGenre.gid, \
             Book.id, \
             Book.title, \
@@ -138,8 +137,7 @@ def genre(id):
 
 @app.route("/book_info/<int:id>")  # page displaying all info on one book
 def book_info(id):
-    conn = sqlite3.connect("bookshelf.db")
-    cur = conn.cursor()
+    cur = cur_setup()
     cur.execute("SELECT * FROM Book WHERE id = ?;", (id,))
     book = cur.fetchone()
     cur.execute("SELECT Genre.name \
