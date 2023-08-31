@@ -18,7 +18,7 @@ p {
     font-family: 'Muli', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-a {
+h2 a {
     color: blue;
 }
 
@@ -68,6 +68,8 @@ nav {
     padding: 0px 20%;
     display: flex;
     box-shadow: 0 0 5px black;
+    position: sticky;
+    top: 0;
 }
 
 nav a {
@@ -103,8 +105,18 @@ main {
     grid-gap: 1.33%;
     display: grid;
     grid-template-columns: 24% 24% 24% 24%;
-    align-items: center;
+    justify-items: center;
     margin: 0 5% 20px 5%;
+}
+
+.book-link {
+    margin: 3% 3% 6% 3%;
+    width: 94%;
+}
+
+.book-link:hover {
+    margin: 0;
+    width: 100%;
 }
 
 main h1 {

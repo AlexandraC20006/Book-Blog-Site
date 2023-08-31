@@ -20,6 +20,7 @@ app = Flask(__name__)
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+
 def cur_setup():
     conn = sqlite3.connect("bookshelf.db")
     return conn.cursor()

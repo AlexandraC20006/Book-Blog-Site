@@ -2,13 +2,13 @@
 {% block content %}
 
 
-<h1 class="page-title">WOW LOOK AT ALL OF THIS PERSON'S BOOKS</h1>
+<h1>WOW LOOK AT ALL OF THIS PERSON'S BOOKS</h1>
 
 <div class="grid-container">
     {% for item in results %}
         <div class="grid-item">
             <a href="/book_info/{{item[1]}}">
-                <img src="/static/images/{{item[3]}}" alt="Cover of {{item[2]}} by {{item[4]}}">
+                <img src="/static/images/{{item[3]}}" alt="Cover of {{item[2]}} by {{item[4]}}" class="book-link">
             </a>
         </div>
     {% endfor %}
