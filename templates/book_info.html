@@ -2,20 +2,29 @@
 {% block content %}
 
 
-<h1 class="page-title">WOW LOOK AT ALL OF THE INFORMATION ON THIS BOOK</h1>
+<h1 class="page-title">{{book[1]}}</h1>
 
-<h2>{{book[0][1]}}</h2>
-<img src="/static/images/{{book[5]}}" alt="Cover of {{book[1]}} by {{authors[0][0]}}">
-<p>{{book[4]}}</p>
-<p><strong>Weeks taken to read:</strong> {{book[3]}}</p>
-<p><strong>My rating:</strong> {{book[2]}}</p>
-<h3>Genres:</h3>
-{% for item in genres %}
-    <p>{{item[0]}}</p>
-{% endfor %}
-<h3>Authors:</h3>
-{% for item in authors %}
-    <p>{{item[0]}}</p>
-{% endfor %}
+<div class="image-and-blurb">
+    <img src="/static/images/{{book[5]}}" alt="Cover of {{book[1]}} by {{authors[0][0]}}">
+    <div class="content">
+        <p>{{book[4]}}</p> <!-- Blurb -->
+        <p><strong>Weeks taken to read:</strong> {{book[3]}}</p>
+        <p><strong>My rating:</strong> {{book[2]}}/5</p>
+    </div>
+</div>
+<div class="extra-book-info">
+    <h3>Genres:</h3>
+    {% for item in genres %}
+        <a href="/genre/{{item[0]}}" class="info-links">
+            <p>{{item[1]}}</p>
+        </a>
+    {% endfor %}
+    <h3>Author(s):</h3>
+    {% for item in authors %}
+        <a href="/author/{{item[0]}}" class="info-links">
+            <p>{{item[1]}}</p>
+        </a>
+    {% endfor %}
+</div>
 
 {% endblock %}

@@ -4,12 +4,16 @@
 
 <h1 class="page-title">WOW LOOK AT ALL THE GENRES</h1>
 
-{% for item in results %}
-    <h2 class="genres">
-        <a href="/genre/{{item[0]}}">
-            {{item[1]}}
-        </a>
-    </h2>
-{% endfor %}
+<div class="genres">
+    {% for item in results %}
+    <a href="/genre/{{item[0]}}">
+        <div class="grid-link">
+                <h2>
+                    {{item[1]}}
+                </h2>
+        </div>
+    </a>
+    {% endfor %}
+</div>
 
 {% endblock %}

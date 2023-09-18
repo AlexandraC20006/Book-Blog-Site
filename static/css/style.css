@@ -14,32 +14,13 @@ img {
     width: 100%;
 }
 
-p {
-    font-family: 'Muli', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
-h2 a {
-    color: blue;
-}
-
-.authors :hover{
+a {
+    text-decoration: none;
     color: #4f6d7a;
 }
 
-.genres :hover {
+a:visited {
     color: #4f6d7a;
-}
-
-.authors {
-    width: 100%;
-    text-align: center;
-    color: blue;
-}
-
-.genres {
-    width: 100%;
-    text-align: center;
-    color: blue;
 }
 
 /*--------------------------*/
@@ -87,6 +68,14 @@ nav a:hover {
     box-shadow: 0 0 2px black;
 }
 
+nav a:visited {
+    color: #eaeaea;
+}
+
+nav a:visited:hover {
+    color: #4f6d7a;
+}
+
 /*---------------------------/
 /                            /
 /            BODY            /
@@ -103,8 +92,10 @@ main {
 
 .grid-container {
     grid-gap: 1.33%;
+    row-gap: 2px;
     display: grid;
     grid-template-columns: 24% 24% 24% 24%;
+    grid-template-rows: minmax(min-content, max-content);
     justify-items: center;
     margin: 0 5% 20px 5%;
 }
@@ -124,6 +115,105 @@ main h1 {
     margin-bottom: 30px;
     text-align: center;
     width: 100%;
+}
+
+.image-and-blurb {
+    display: flex;
+    padding: 1% 1%;
+    margin: 0 1%;
+    background-color: white;
+}
+
+.image-and-blurb img {
+    width: 33%;
+}
+
+.image-and-blurb .content {
+    margin: 2%;
+}
+
+.image-and-blurb p {
+    font-size: large;
+}
+
+.extra-book-info {
+    margin-left: 2%;
+}
+
+.authors {
+    display: grid;
+    grid-gap: 1%;
+    row-gap: 8px;
+    grid-template-columns: 19% 19% 19%;
+    grid-auto-rows: minmax(90px, max-content);
+    margin: 0 20% 10px 20%;
+    width: 100%;
+    text-align: center;
+    text-justify: center;
+}
+
+.authors a {
+    background-color: #c0d6df;
+}
+
+.genres {
+    display: grid;
+    grid-gap: 1%;
+    row-gap: 5px;
+    grid-template-columns: 19% 19% 19%;
+    grid-auto-rows: 90px;
+    margin: 0 20%;
+    width: 100%;
+    text-align: center;
+    text-justify: center;
+}
+
+.genres a {
+    background-color: #c0d6df;
+}
+
+.genres a:hover {
+    color: #eaeaea;
+}
+
+.authors:hover{
+    color: #4f6d7a;
+}
+
+.genres:hover {
+    color: #4f6d7a;
+}
+
+.info-links {
+    color: black;
+}
+
+.infolinks:hover {
+    color: #4f6d7a;
+}
+
+.info-links:visited {
+    color: black;
+}
+
+.info-links:visited:hover {
+    color: #4f6d7a;
+}
+
+.guest-signin {
+    color: black;
+}
+
+.guest-signin:hover {
+    color: #4f6d7a;
+}
+
+.guest-signin:visited {
+    color: black;
+}
+
+.guest-signin:visited:hover {
+    color: #4f6d7a;
 }
 
 /*--------------------------*/

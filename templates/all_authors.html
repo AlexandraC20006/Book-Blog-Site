@@ -4,12 +4,17 @@
 
 <h1 class="page-title">WOW LOOK AT ALL THE AUTHORS</h1>
 
-{% for item in results %}
-    <h2 class="authors">
-        <a href="/author/{{item[0]}}">
-            {{item[1]}}
-        </a>
-    </h2>
-{% endfor %}
+<div class="authors">
+    {% for item in results %}
+    <a href="/author/{{item[0]}}">
+        <div class="grid-link">
+            <img src="static/images/{{item[2]}}" alt="Photo of {{item[1]}}">
+            <h2>
+                {{item[1]}}
+            </h2>
+        </div>
+    </a>
+    {% endfor %}
+</div>
 
 {% endblock %}
