@@ -154,6 +154,13 @@ main h1 {
 
 .authors a {
     background-color: #c0d6df;
+    color: #1C272B;
+    border: #4f6d7a 1px solid;
+}
+
+.authors a img {
+    margin: 5%;
+    width: 90%;
 }
 
 .genres {
@@ -170,22 +177,34 @@ main h1 {
 
 .genres a {
     background-color: #c0d6df;
+    color: #1C272B;
 }
 
-.genres a:hover {
-    color: #eaeaea;
+.genres a h2 {
+    margin: 5px;
+    align-self: center;
 }
 
-.authors:hover{
+.genres a img {
+    margin: 5%;
+    width: 90%;
+}
+
+.authors a h2 {
+    margin: 10px 10px 20px 10px;
+    align-self: center;
+}
+
+.authors a:hover{
     color: #4f6d7a;
 }
 
-.genres:hover {
+.genres a:hover {
     color: #4f6d7a;
 }
 
 .info-links {
-    color: black;
+    color: #1C272B;
 }
 
 .infolinks:hover {
@@ -193,7 +212,7 @@ main h1 {
 }
 
 .info-links:visited {
-    color: black;
+    color: #1C272B;
 }
 
 .info-links:visited:hover {
@@ -201,7 +220,7 @@ main h1 {
 }
 
 .guest-signin {
-    color: black;
+    color: #1C272B;
 }
 
 .guest-signin:hover {
@@ -209,7 +228,7 @@ main h1 {
 }
 
 .guest-signin:visited {
-    color: black;
+    color: #1C272B;
 }
 
 .guest-signin:visited:hover {

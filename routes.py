@@ -45,7 +45,6 @@ def page_not_found_500(e):
 @app.route("/sign_in", methods=["GET", "POST"])  # sign in page
 def sign_in():
     # user_id = session.get("user_id") # Retrieve a value from the session
-
     error = None
     if request.method == "POST":
         username = request.form["username"]
