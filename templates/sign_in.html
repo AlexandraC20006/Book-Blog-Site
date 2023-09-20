@@ -2,20 +2,24 @@
 {% block content %}
 
 
-<h2>Please log in</h2>
-<br>
 
-<form action = "" method = "post">
-    <label for="username">Username:</label><br>
-    <input type="text" placeholder="Username" name="username" value="{{request.form.username}}"><br><br>
-    <label for="password">Password:</label><br>
-    <input type="password" placeholder="Password" name="password" value="{{request.form.password}}">
-    <input class="btn btn-default" type="submit" value="Login">
-</form>
-{% if error %}
-    <p class="error"><strong>Error:</strong> {{error}}</p>
-{% endif %}
-<br>
-<a href="/allbooks" class="guest-signin">Continue as guest</a>
+
+<div class="sign-in-page">
+    <h2>Please log in to add books</h2>
+    <br>
+    
+    <form action = "" method = "post">
+        <label for="username">Username:</label><br>
+        <input type="text" placeholder="Username" name="username" value="{{request.form.username}}"><br><br>
+        <label for="password">Password:</label><br>
+        <input type="password" placeholder="Password" name="password" value="{{request.form.password}}">
+        <input class="btn btn-default" type="submit" value="Login">
+    </form>
+    {% if error %}
+        <p class="error"><strong>Error:</strong> {{error}}</p>
+    {% endif %}
+    <br>
+    <a href="/allbooks" class="guest-signin">Continue as guest</a>
+</div>
 
 {% endblock %}

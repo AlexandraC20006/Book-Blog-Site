@@ -50,6 +50,7 @@ nav {
     display: flex;
     box-shadow: 0 0 5px black;
     position: sticky;
+    position: -webkit-sticky; /*Safari*/
     top: 0;
 }
 
@@ -74,6 +75,26 @@ nav a:visited {
 
 nav a:visited:hover {
     color: #4f6d7a;
+}
+
+.sign-in-button {
+    color: #e8dab2;
+    background-color: #4f6d7a;
+}
+
+.sign-in-button:hover {
+    color: #dd6e42;
+    background-color: #e8dab2;
+}
+
+.sign-in-button:visited {
+    color: #e8dab2;
+    background-color: #4f6d7a;
+}
+
+.sign-in-button:visited:hover {
+    color: #dd6e42;
+    background-color: #e8dab2;
 }
 
 /*---------------------------/
@@ -166,10 +187,10 @@ main h1 {
 .genres {
     display: grid;
     grid-gap: 1%;
-    row-gap: 5px;
+    row-gap: 8px;
     grid-template-columns: 19% 19% 19%;
-    grid-auto-rows: 90px;
-    margin: 0 20%;
+    grid-auto-rows: minmax(90px, max-content);
+    margin: 0 20% 10px 20%;
     width: 100%;
     text-align: center;
     text-justify: center;
@@ -178,10 +199,11 @@ main h1 {
 .genres a {
     background-color: #c0d6df;
     color: #1C272B;
+    border: #4f6d7a 1px solid;
 }
 
 .genres a h2 {
-    margin: 5px;
+    margin: 5px 10px 20px 10px;
     align-self: center;
 }
 
@@ -191,7 +213,7 @@ main h1 {
 }
 
 .authors a h2 {
-    margin: 10px 10px 20px 10px;
+    margin: 5px 10px 20px 10px;
     align-self: center;
 }
 
@@ -235,6 +257,43 @@ main h1 {
     color: #4f6d7a;
 }
 
+.home {
+    text-align: center;
+    margin: 2% 5%;
+    font-size: larger;
+}
+
+/*
+.sign-in-out-button p {
+    text-align: center;
+    color: #1C272B;
+    font-size: x-large;
+}
+
+.big-button {
+    text-align: center;
+    margin-top: 70px;
+    background-color: #c0d6df;
+    padding: 2%;
+    position: relative;
+    bottom: -50px;
+}
+
+.big-button:hover {
+    color: #4f6d7a;
+}
+
+.sign-in-out-button .small {
+    font-size: small;
+    margin: 0 0 2% 0;
+}
+*/
+
+.sign-in-page {
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
 /*--------------------------*/
 /*                          */
 /*          FOOTER          */
@@ -244,4 +303,8 @@ main h1 {
 footer {
     background-color: #4f6d7a;
     padding: 10px;
+}
+
+.footer-disclaimer {
+    display: inline;
 }

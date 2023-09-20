@@ -8,9 +8,10 @@
     {% for item in results %}
     <a href="/genre/{{item[0]}}">
         <div class="grid-link">
-                <h2>
-                    {{item[1]}}
-                </h2>
+            <img src="static/images/{{item[2]}}" alt="{{item[1]}}">
+            <h2>
+                {{item[1]}}
+            </h2>
         </div>
     </a>
     {% endfor %}

@@ -44,22 +44,31 @@ def page_not_found_500(e):
 # https://realpython.com/introduction-to-flask-part-2-creating-a-login-page/
 @app.route("/sign_in", methods=["GET", "POST"])  # sign in page
 def sign_in():
-    # user_id = session.get("user_id") # Retrieve a value from the session
-    error = None
-    if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
-        # check if input is correct
-        if username != correct_username or password != correct_password:
-            # error message if input is wrong
-            error = "Incorrect username or password. Please try again."
-        else:
-            # Store values in the session
-            session["username"] = username
-            session["logged_in"] = True
-            # if correct, takes you to home page
-            return redirect(url_for("home"))
-    return render_template("sign_in.html", error=error)
+    if session["logged_in"] == False:
+        # user_id = session.get("user_id") # Retrieve a value from the session
+        error = None
+        if request.method == "POST":
+            username = request.form["username"]
+            password = request.form["password"]
+            # check if input is correct
+            if username != correct_username or password != correct_password:
+                # error message if input is wrong
+                error = "Incorrect username or password. Please try again."
+            else:
+                # Store values in the session
+                session["username"] = username
+                session["logged_in"] = True
+                # if correct, takes you to home page
+                return redirect(url_for("home"))
+        return render_template("sign_in.html", error=error)
+    else:
+        return redirect(url_for("sign_out"))
+
+
+@app.route("/sign_out")  # changes your session from logged in to logged out
+def sign_out():
+    session["logged_in"] = False
+    return render_template("sign_out.html")
 
 
 @app.route("/")  # home page
@@ -89,16 +98,10 @@ def all_books():
     return render_template("all_books.html", results=results, rows=rows)
 
 
-@app.route("/sign_out")  # changes your session from logged in to logged out
-def sign_out():
-    session["logged_in"] = False
-    return render_template("sign_out.html")
-
-
 @app.route("/authors")  # List of authors, they link to a page with their books
 def all_authors():
     cur = cur_setup()
-    cur.execute("SELECT * FROM Author")
+    cur.execute("SELECT * FROM Author ORDER BY name;")
     results = cur.fetchall()
     return render_template("all_authors.html", results=results)
 
@@ -112,7 +115,7 @@ def author(id):
     if not check:
         return render_template("404.html")
     else:
-        # Information on books, joined to authors and only the author on that page
+        # Info on books, joined to authors and only the author on that page
         cur.execute("SELECT BookAuthor.aid, \
                 Book.id, \
                 Book.title, \
@@ -131,7 +134,7 @@ def author(id):
 @app.route("/genres")  # List of genres, they link to a page with their books
 def all_genres():
     cur = cur_setup()
-    cur.execute("SELECT * FROM Genre")
+    cur.execute("SELECT * FROM Genre ORDER BY name;")
     results = cur.fetchall()
     return render_template("all_genres.html", results=results)
 
