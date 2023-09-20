@@ -44,7 +44,7 @@ def page_not_found_500(e):
 # https://realpython.com/introduction-to-flask-part-2-creating-a-login-page/
 @app.route("/sign_in", methods=["GET", "POST"])  # sign in page
 def sign_in():
-    if session["logged_in"] == False:
+    if session.get["logged_in"] is False:
         # user_id = session.get("user_id") # Retrieve a value from the session
         error = None
         if request.method == "POST":
@@ -71,9 +71,14 @@ def sign_out():
     return render_template("sign_out.html")
 
 
-@app.route("/")  # home page
+@app.route("/")
+def first_page():
+    session["logged_in"] = False
+    return redirect(url_for("home"))
+
+@app.route("/home")  # home page
 def home():
-    if session.get("logged_in") is True:
+    if session.get["logged_in"] == True:
         # takes you to signed in home page
         return render_template("home_si.html")
     else:
@@ -174,21 +179,24 @@ def book_info(id):
     cur = cur_setup()
     cur.execute("SELECT * FROM Book WHERE id = ?;", (id,))
     book = cur.fetchone()
-    # genres of book, joins genre onto book
-    cur.execute("SELECT Genre.id, Genre.name \
-        FROM Genre \
-            JOIN \
-            BookGenre ON BookGenre.gid = Genre.id \
-        WHERE BookGenre.bid = ?;", (id,))
-    genres = cur.fetchall()
-    # authors of book, joins author onto book
-    cur.execute("SELECT Author.id, Author.name \
-        FROM Author \
-            JOIN \
-            BookAuthor ON BookAuthor.aid = Author.id \
-        WHERE BookAuthor.bid = ?;", (id,))
-    authors = cur.fetchall()
-    return render_template("book_info.html", book=book, genres=genres, authors=authors)
+    if not book:
+        return render_template("404.html")
+    else:
+        # genres of book, joins genre onto book
+        cur.execute("SELECT Genre.id, Genre.name \
+            FROM Genre \
+                JOIN \
+                BookGenre ON BookGenre.gid = Genre.id \
+            WHERE BookGenre.bid = ?;", (id,))
+        genres = cur.fetchall()
+        # authors of book, joins author onto book
+        cur.execute("SELECT Author.id, Author.name \
+            FROM Author \
+                JOIN \
+                BookAuthor ON BookAuthor.aid = Author.id \
+            WHERE BookAuthor.bid = ?;", (id,))
+        authors = cur.fetchall()
+        return render_template("book_info.html", book=book, genres=genres, authors=authors)
 
 
 if __name__ == "__main__":
