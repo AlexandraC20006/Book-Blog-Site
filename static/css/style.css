@@ -16,11 +16,6 @@ img {
 
 a {
     text-decoration: none;
-    color: #4f6d7a;
-}
-
-a:visited {
-    color: #4f6d7a;
 }
 
 /*--------------------------*/
@@ -77,26 +72,6 @@ nav a:visited:hover {
     color: #4f6d7a;
 }
 
-.sign-in-button {
-    color: #e8dab2;
-    background-color: #4f6d7a;
-}
-
-.sign-in-button:hover {
-    color: #dd6e42;
-    background-color: #e8dab2;
-}
-
-.sign-in-button:visited {
-    color: #e8dab2;
-    background-color: #4f6d7a;
-}
-
-.sign-in-button:visited:hover {
-    color: #dd6e42;
-    background-color: #e8dab2;
-}
-
 /*---------------------------/
 /                            /
 /            BODY            /
@@ -110,6 +85,29 @@ main {
     min-height: 700px;
     align-items: center;
 }
+
+.home {
+    text-align: center;
+    margin: 2% 5%;
+    font-size: larger;
+    color: #1C272B;
+}
+
+.home a:hover {
+    color: #4f6d7a;
+}
+
+.home a:visited {
+    color: #1C272B;
+}
+
+.home a:visited:hover {
+    color: #4f6d7a;
+}
+
+/*-----------------/
+/  ALL BOOKS PAGE  /
+/-----------------*/
 
 .grid-container {
     grid-gap: 1.33%;
@@ -138,6 +136,10 @@ main h1 {
     width: 100%;
 }
 
+/*-----------------/
+/  BOOK INFO PAGE  /
+/-----------------*/
+
 .image-and-blurb {
     display: flex;
     padding: 1% 1%;
@@ -161,6 +163,26 @@ main h1 {
     margin-left: 2%;
 }
 
+.info-links {
+    color: #1C272B;
+}
+
+.infolinks:hover {
+    color: #4f6d7a;
+}
+
+.info-links:visited {
+    color: #1C272B;
+}
+
+.info-links:visited:hover {
+    color: #4f6d7a;
+}
+
+/*---------------/
+/  AUTHORS PAGE  /
+/---------------*/
+
 .authors {
     display: grid;
     grid-gap: 1%;
@@ -183,6 +205,19 @@ main h1 {
     margin: 5%;
     width: 90%;
 }
+
+.authors a h2 {
+    margin: 5px 10px 20px 10px;
+    align-self: center;
+}
+
+.authors a:hover{
+    color: #4f6d7a;
+}
+
+/*--------------/
+/  GENRES PAGE  /
+/--------------*/
 
 .genres {
     display: grid;
@@ -212,34 +247,13 @@ main h1 {
     width: 90%;
 }
 
-.authors a h2 {
-    margin: 5px 10px 20px 10px;
-    align-self: center;
-}
-
-.authors a:hover{
-    color: #4f6d7a;
-}
-
 .genres a:hover {
     color: #4f6d7a;
 }
 
-.info-links {
-    color: #1C272B;
-}
-
-.infolinks:hover {
-    color: #4f6d7a;
-}
-
-.info-links:visited {
-    color: #1C272B;
-}
-
-.info-links:visited:hover {
-    color: #4f6d7a;
-}
+/*---------------------------/
+/  SIGNIN/OUT PAGES/BUTTONS  /
+/---------------------------*/
 
 .guest-signin {
     color: #1C272B;
@@ -257,41 +271,27 @@ main h1 {
     color: #4f6d7a;
 }
 
-.home {
-    text-align: center;
-    margin: 2% 5%;
-    font-size: larger;
-}
-
-/*
-.sign-in-out-button p {
-    text-align: center;
-    color: #1C272B;
-    font-size: x-large;
-}
-
 .big-button {
     text-align: center;
-    margin-top: 70px;
     background-color: #c0d6df;
     padding: 2%;
     position: relative;
-    bottom: -50px;
+    text-align: center;
+    color: #1C272B;
+    font-size: x-large;
+    margin: 20px 0 0 0;
 }
 
 .big-button:hover {
     color: #4f6d7a;
 }
 
-.sign-in-out-button .small {
-    font-size: small;
-    margin: 0 0 2% 0;
+.big-button:visited {
+    color: #1C272B;
 }
-*/
 
-.sign-in-page {
-    margin-left: 5%;
-    margin-top: 5%;
+.big-button:visited:hover {
+    color: #4f6d7a;
 }
 
 /*--------------------------*/

@@ -10,10 +10,10 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask_session import Session
 import sqlite3
-import math
 
 
 app = Flask(__name__)
+
 correct_username = "admin"
 correct_password = "admin"
 
@@ -44,25 +44,22 @@ def page_not_found_500(e):
 # https://realpython.com/introduction-to-flask-part-2-creating-a-login-page/
 @app.route("/sign_in", methods=["GET", "POST"])  # sign in page
 def sign_in():
-    if session.get["logged_in"] is False:
-        # user_id = session.get("user_id") # Retrieve a value from the session
-        error = None
-        if request.method == "POST":
-            username = request.form["username"]
-            password = request.form["password"]
-            # check if input is correct
-            if username != correct_username or password != correct_password:
-                # error message if input is wrong
-                error = "Incorrect username or password. Please try again."
-            else:
-                # Store values in the session
-                session["username"] = username
-                session["logged_in"] = True
-                # if correct, takes you to home page
-                return redirect(url_for("home"))
-        return render_template("sign_in.html", error=error)
-    else:
-        return redirect(url_for("sign_out"))
+    # user_id = session.get("user_id") # Retrieve a value from the session
+    error = None
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        # check if input is correct
+        if username != correct_username or password != correct_password:
+            # error message if input is wrong
+            error = "Incorrect username or password. Please try again."
+        else:
+            # Store values in the session
+            session["username"] = username
+            session["logged_in"] = True
+            # if correct, takes you to home page
+            return redirect(url_for("home"))
+    return render_template("sign_in.html", error=error)
 
 
 @app.route("/sign_out")  # changes your session from logged in to logged out
@@ -71,14 +68,9 @@ def sign_out():
     return render_template("sign_out.html")
 
 
-@app.route("/")
-def first_page():
-    session["logged_in"] = False
-    return redirect(url_for("home"))
-
-@app.route("/home")  # home page
+@app.route("/")  # home page
 def home():
-    if session.get["logged_in"] == True:
+    if session.get("logged_in") is True:
         # takes you to signed in home page
         return render_template("home_si.html")
     else:
@@ -98,14 +90,13 @@ def all_books():
         JOIN BookAuthor ON Book.id = BookAuthor.bid \
         JOIN Author ON Author.id = BookAuthor.aid;")
     results = cur.fetchall()
-    row_amount = len(results)/3
-    rows = math.ceil(row_amount)  # rows of images to display
-    return render_template("all_books.html", results=results, rows=rows)
+    return render_template("all_books.html", results=results)
 
 
 @app.route("/authors")  # List of authors, they link to a page with their books
 def all_authors():
     cur = cur_setup()
+    # id, name, image
     cur.execute("SELECT * FROM Author ORDER BY name;")
     results = cur.fetchall()
     return render_template("all_authors.html", results=results)
@@ -117,6 +108,7 @@ def author(id):
     # Checking if there is an author with that id in database
     cur.execute("SELECT id FROM Author WHERE id = ?", (id,))
     check = cur.fetchone()
+    # if there is no author with that id, go to 404. else show that author
     if not check:
         return render_template("404.html")
     else:
@@ -139,6 +131,7 @@ def author(id):
 @app.route("/genres")  # List of genres, they link to a page with their books
 def all_genres():
     cur = cur_setup()
+    # id, name, image
     cur.execute("SELECT * FROM Genre ORDER BY name;")
     results = cur.fetchall()
     return render_template("all_genres.html", results=results)
@@ -150,10 +143,11 @@ def genre(id):
     # Checking if there is a genre with that id in database
     cur.execute("SELECT id FROM Genre WHERE id = ?", (id,))
     check = cur.fetchone()
+    # if there is no genre with that id, go to 404. else show that genre
     if not check:
         return render_template("404.html")
     else:
-        # Getting book, genre and author information for every book in this genre
+        # Get book, genre and author information for every book in this genre
         cur.execute("SELECT BookGenre.gid, \
                 Book.id, \
                 Book.title, \
@@ -177,8 +171,10 @@ def genre(id):
 @app.route("/book_info/<int:id>")  # page displaying all info on one book
 def book_info(id):
     cur = cur_setup()
+    # id, name, rating, weeks to read, blurb, image
     cur.execute("SELECT * FROM Book WHERE id = ?;", (id,))
     book = cur.fetchone()
+    # if there is no book with that id, go to 404. else show that book
     if not book:
         return render_template("404.html")
     else:
@@ -196,7 +192,8 @@ def book_info(id):
                 BookAuthor ON BookAuthor.aid = Author.id \
             WHERE BookAuthor.bid = ?;", (id,))
         authors = cur.fetchall()
-        return render_template("book_info.html", book=book, genres=genres, authors=authors)
+        return render_template("book_info.html",
+                               book=book, genres=genres, authors=authors)
 
 
 if __name__ == "__main__":
